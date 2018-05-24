@@ -179,15 +179,19 @@ int logicalShift(int x, int n) {
 int bitCount(int x) {
   // use hemming weight
   // not finished
-  int v = 7;
-  int c1 = (0x55 << 24) + (0x55 << 16) + (0x55 << 8) + 0x55;
-  int c2 = (0x33 << 24) + (0x33 << 16) + (0x33 << 8) + 0x33;
-  int c3 = (0x0f << 24) + (0x0f << 16) + (0x0f << 8) + 0x0f;
-  int c4 = (0x01 << 24) + (0x01 << 16) + (0x01 << 8) + 0x01;
+  int m1 = (0x55 << 24) + (0x55 << 16) + (0x55 << 8) + 0x55;
+  int m2 = (0x33 << 24) + (0x33 << 16) + (0x33 << 8) + 0x33;
+  int m4 = (0x0f << 24) + (0x0f << 16) + (0x0f << 8) + 0x0f;
+  int m8 = (0xff << 16) + 0xff;
+  int m16 = (0xff << 8) + 0xff;
+  
+  x = (x & m1) + ((x >> 1) & m1);
+  x = (x & m2) + ((x >> 2) & m2);
+  x = (x & m4) + ((x >> 4) & m4);
+  x = (x & m8) + ((x >> 8) & m8);
+  x = (x & m16) + ((x >> 16) & m16);
+  return x; 
   // substraction
-  v = v + (~((v >> 1) & c1) + 1);
-  v = (v & c2 + ((v >> 2) & c2));
-  return ((v + (v >> 4) & c3) * c4) >> 24;
   //return 2;
 }
 /* 
