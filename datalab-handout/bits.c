@@ -184,7 +184,13 @@ int bitCount(int x) {
   int m4 = (0x0f << 24) + (0x0f << 16) + (0x0f << 8) + 0x0f;
   int m8 = (0xff << 16) + 0xff;
   int m16 = (0xff << 8) + 0xff;
-  
+  //x = x + (~((x >> 1) & m1) + 1);
+  //x = (x & m2) + ((x >> 2) & m2);
+  //x = (x + (x >> 4)) & m4;
+  //x = x + x >> 8;
+  //x = x + x >> 16;
+  // x = x + x >> 32;
+  // old version with more ops
   x = (x & m1) + ((x >> 1) & m1);
   x = (x & m2) + ((x >> 2) & m2);
   x = (x & m4) + ((x >> 4) & m4);
@@ -211,7 +217,7 @@ int bang(int x) {
  *   Rating: 1
  */
 int tmin(void) {
-  return 2;
+  return 0x01 << 31;
 }
 /* 
  * fitsBits - return 1 if x can be represented as an 
@@ -244,7 +250,7 @@ int divpwr2(int x, int n) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  return ~x + 1;
 }
 /* 
  * isPositive - return 1 if x > 0, return 0 otherwise 
@@ -254,7 +260,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isPositive(int x) {
-  return 2;
+   return !(((x >> 31) & 0x01) | !(x | 0));
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -264,7 +270,10 @@ int isPositive(int x) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+   int result = x + (~y + 1);
+   int x_sign = (x >> 31) & 0x01;
+   int y_sign = (y >> 31) & 0x01;
+   return ((result >> 31) & 0x01) | (!(result | 0));
 }
 /*
  * ilog2 - return floor(log base 2 of x), where x > 0
