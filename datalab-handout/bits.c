@@ -270,10 +270,15 @@ int isPositive(int x) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-   int result = x + (~y + 1);
-   int x_sign = (x >> 31) & 0x01;
-   int y_sign = (y >> 31) & 0x01;
-   return ((result >> 31) & 0x01) | (!(result | 0));
+   //int result = x + (~y + 1);
+   //int x_sign = (x >> 31) & 0x01;
+   //int y_sign = (y >> 31) & 0x01;
+   //int if_xsmaller_on_sign = (x_sign ^ y_sign) & x_sign; 
+   //return  | ((result >> 31) & 0x01) | (!(result | 0));
+   int diff_sgn = !(x >> 31) ^ !(y >> 31);
+   int a = diff_sgn & (x >> 31);
+   int b = !diff_sgn & !((y + (~x + 1)) >> 31);
+   return a | b;
 }
 /*
  * ilog2 - return floor(log base 2 of x), where x > 0
