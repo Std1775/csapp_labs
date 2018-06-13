@@ -292,7 +292,72 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4
  */
 int ilog2(int x) {
-  return 2;
+  int n = 0;
+  int num = x;
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+  num = num >> 1;
+  n = n + !(!(num));
+
+  return n;
 }
 /* 
  * float_neg - Return bit-level equivalent of expression -f for
