@@ -229,7 +229,7 @@ int tmin(void) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-  int shift = n + 0xFFFFFFFF;
+  int shift = n + (~0x0);
   int shifted = x >> shift;
   return shifted == 0 || shifted == -1;
 }
@@ -242,7 +242,7 @@ int fitsBits(int x, int n) {
  *   Rating: 2
  */
 int divpwr2(int x, int n) {
-    int mask = ~(0xFFFFFFFF << n);
+    int mask = ~(~0x0 << n);
     int bias = (x >> 31) & mask;
     return (x + bias) >> n;
 }
