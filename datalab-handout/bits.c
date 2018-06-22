@@ -371,7 +371,16 @@ int ilog2(int x) {
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
- return 2;
+  int mask = 0x80000000;
+  int E = uf & 0x7F800000;
+  int M = uf & 0x007FFFFF;
+  int NEG_INFINITY = 0x80800000;
+  int POS_INFINITY = 0;
+  if (M == 0) {
+    if (E)
+  } else {
+    return uf ^ mask;
+  } 
 }
 /* 
  * float_i2f - Return bit-level equivalent of expression (float) x
