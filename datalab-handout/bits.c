@@ -372,15 +372,13 @@ int ilog2(int x) {
  */
 unsigned float_neg(unsigned uf) {
   int mask = 0x80000000;
-  int E = uf & 0x7F800000;
-  int M = uf & 0x007FFFFF;
-  int NEG_INFINITY = 0x80800000;
-  int POS_INFINITY = 0;
-  if (M == 0) {
-    if (E)
-  } else {
-    return uf ^ mask;
-  } 
+  unsigned int E = (uf << 1) >> 24;
+  unsigned int M = (uf << 9) >> 9;
+  // check if uf is NaN
+  if (E >= 255 && M != 0) {
+    return uf;   
+  }
+  return uf ^ mask; 
 }
 /* 
  * float_i2f - Return bit-level equivalent of expression (float) x
