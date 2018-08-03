@@ -1,2 +1,4 @@
 # csapp_labs
-Lab assignments for csapp course
+Lab assignments (self-study)
+
+
