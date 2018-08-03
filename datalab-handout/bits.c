@@ -390,7 +390,27 @@ unsigned float_neg(unsigned uf) {
  *   Rating: 4
  */
 unsigned float_i2f(int x) {
-  return 2;
+  if (x == 0) {
+    return x;
+  }
+  int sign_bit = (x >> 31) & 0x01; 
+  unsigned num = x;
+  int bit_cnt = 0;
+  while (num != 1) {
+    num = num >> 1;
+    bit_cnt += 1;
+  }
+  int exp_bit_cnt = bit_cnt;
+  int bias = 0x7F;
+  int exp_bits = bias + exp_bit_cnt;
+  if (bit_cnt == 0) {
+    exp_bits = 0;
+  }
+  int frac_bits = ~(1 << exp_bit_cnt) & x;
+  // printf("%x", sign_bit);
+  // printf("%x", exp_bits);
+  // printf("%x", frac_bits);
+  return (sign_bit << 0x1F) + (exp_bits << 0x17) +(frac_bits << (0x16 - bit_cnt));
 }
 /* 
  * float_twice - Return bit-level equivalent of expression 2*f for
